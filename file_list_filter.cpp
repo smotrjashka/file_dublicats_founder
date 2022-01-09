@@ -82,7 +82,9 @@ void file_list_filter::filter_extensions_dot(std::vector<std::string> &extension
 
 
         to_lower_case(extensions);
+        std::cout << "after to lower case " << std::endl;
         filter_duplicate_extension(extensions);
+        std::cout << "after filter dublicat" << std::endl;
     }
 }
 
@@ -102,21 +104,32 @@ std::string file_list_filter::to_lower_case(std::string extension) {
     std::cout << " after " << extension << std::endl;
 }
 
-
-void file_list_filter::filter_duplicate_extension(std::vector<std::string> &extensions) {
-    for (auto it = extensions.begin(); it != extensions.end(); ) {
-        std::string current_string = *it;
-        bool is_dublicat = false;
-        for(auto it2 = it++; it2 != extensions.end(); it2++){
-            if (*it == *it2){
-                auto temp_it = it++;
-                extensions.erase(temp_it);
-                is_dublicat = true;
-                break;
+//TODO debug
+void file_list_filter::filter_duplicate_extension(std::vector<std::string>& extensions) {
+    if (extensions.size()>1) {
+        std::cout << "size > 1" << std::endl;
+        for (std::vector<std::string>::iterator it = extensions.begin(); it != extensions.end();) {
+            std::cout << " take step " ;
+            std::string current_string(*it);
+            std::cout << current_string << std::endl;
+            bool is_dublicat = false;
+            for (auto it2 = it++; it2 != extensions.end(); it2++) {
+                std::cout << " take step in second for";
+                if (*it == *it2) {
+                    std::cout << " if ";
+                    auto temp_it = it++;
+                    extensions.erase(temp_it);
+                    is_dublicat = true;
+                    std::cout << " before breake ";
+                    break;
+                }
+                std::cout << " after if ";
             }
-        }
-        if (!is_dublicat){
-            it++;
+            std::cout << " after second for ";
+            if (!is_dublicat) {
+                std::cout << " we dont have dublicats go forward ";
+                it++;
+            }
         }
     }
 }
