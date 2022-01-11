@@ -74,75 +74,51 @@ void file_list_filter::filter_extensions_dot(std::vector<std::string> &extension
     if (!extensions.empty()) {
         for (auto &extension: extensions) {
             if (extension[0] == '.') {
-                std::cout << "extention " << extension;
                 extension = extension.substr(1);
-                std::cout << " now is " << extension;
             }
         }
 
 
         to_lower_case(extensions);
-        std::cout << "after to lower case " << std::endl;
-        for (std::string ext : extensions){
-            std::cout << "ext=" << ext << " ";}
+
         filter_duplicate_extension(extensions);
-        std::cout << "after filter dublicat" << std::endl;
+
     }
 }
 
 void file_list_filter::to_lower_case(std::vector<std::string>& extensions){
 
     filter_duplicate_extension(extensions);
-    std::cout << "after filter dublicats" << std::endl;
-    for (std::string& ext : extensions){
-        std::cout << "ext=" << ext << " ";
-    }
+
     for (std::string &extension: extensions) {
-
         to_lower_case(extension);
-        std::cout << "after lover case " << extension;
-
-
     }
-    std::cout << "FINISH lower case GEN!" << extensions.size() << std::endl;
-    //TODO debug
-    for (std::string& exte : extensions){
-        std::cout << "exte=" << exte << " ";}
+
     ///может оставить одну??? эту вторую???
     filter_duplicate_extension(extensions);
 }
 
 void file_list_filter::to_lower_case(std::string& extension) {
-    std::cout << "before convert " << extension;
     for (auto &ext_c : extension) {
         ext_c = tolower(ext_c);
     }
-    std::cout << " after " << extension << std::endl;
 }
 
 
 void file_list_filter::filter_duplicate_extension(std::vector<std::string>& extensions) {
     if (extensions.size()>1) {
-        std::cout << "size > 1" << std::endl;
         for (std::vector<std::string>::iterator it = extensions.begin(); it != extensions.end();) {
-            std::cout << std::endl << " take step !";
             std::string current_string(*it);
             std::cout << current_string << std::endl;
             bool is_dublicat = false;
             for (auto it2 = ++it; it2 != extensions.end(); it2++) {
-                std::cout << " take step in second for!";
                 if (current_string == *it2) {
-                    std::cout << " if ";
                     extensions.erase(it2);
                     is_dublicat = true;
-                    std::cout << " before breake ";
                     break;
                 }
-                std::cout << " after if ";
             }
-            std::cout << " after second for ";
             if (!is_dublicat) {
-                std::cout << " we dont have dublicats go forward ";
                 it++;
             }
         }
