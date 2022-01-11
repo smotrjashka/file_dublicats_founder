@@ -91,26 +91,28 @@ void file_list_filter::filter_extensions_dot(std::vector<std::string> &extension
 }
 
 void file_list_filter::to_lower_case(std::vector<std::string>& extensions){
-    std::cout << "START lower case GENERAL" << std::endl;
-    for (std::string ext : extensions){
-        std::cout << "ext=" << ext << " ";}
+
     filter_duplicate_extension(extensions);
     std::cout << "after filter dublicats" << std::endl;
-    for (std::string ext : extensions){
-        std::cout << "ext=" << ext << " ";}
-    for (auto &extension: extensions) {
+    for (std::string& ext : extensions){
+        std::cout << "ext=" << ext << " ";
+    }
+    for (std::string &extension: extensions) {
 
-        extension = to_lower_case(extension);
+        to_lower_case(extension);
+        std::cout << "after lover case " << extension;
+
 
     }
-    std::cout << "FINISH lower case GEN" << std::endl;
+    std::cout << "FINISH lower case GEN!" << extensions.size() << std::endl;
     //TODO debug
-    for (std::string ext : extensions){
-        std::cout << "ext=" << ext << " ";}
+    for (std::string& exte : extensions){
+        std::cout << "exte=" << exte << " ";}
+    ///может оставить одну??? эту вторую???
     filter_duplicate_extension(extensions);
 }
 
-std::string file_list_filter::to_lower_case(std::string extension) {
+void file_list_filter::to_lower_case(std::string& extension) {
     std::cout << "before convert " << extension;
     for (auto &ext_c : extension) {
         ext_c = tolower(ext_c);

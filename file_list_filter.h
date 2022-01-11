@@ -23,7 +23,7 @@ namespace file_list_filter {
 
     void to_lower_case(std::vector<std::string>& extensions);
 
-    std::string to_lower_case(std::string extension);
+    void to_lower_case(std::string& extension);
 
     bool vector_contains(const std::vector<std::string> &vec_str, const std::string& str_for_search);
 };
