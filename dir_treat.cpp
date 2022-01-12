@@ -86,6 +86,34 @@ void remove_elems_with_unique_value(std::map<std::string, std::string>& map, std
     std::cout << "remove unique FINISH map=" << map.size()  << " vec=" << vec.size() << std::endl;
 }
 
+std::string get_hashed(const std::string& buffered_symbols, std::string& hash_algorithm){
+        std::string hashed_symbols;
+    //TODO куда-то эту хрень нужно перенести а то оно ж каждый раз проверяет
+    if (hash_algorithm == "md5"){
+        hashed_symbols = md5(buffered_symbols);
+    } else if (hash_algorithm == "sha1"){
+
+        hashed_symbols = sha1(buffered_symbols);
+    } else if (hash_algorithm == "sha224"){
+
+        hashed_symbols = sha224(buffered_symbols);
+    } else if (hash_algorithm == "sha256"){
+        hashed_symbols = sha256(buffered_symbols);
+    } else if (hash_algorithm == "sha384"){
+        hashed_symbols = sha384(buffered_symbols);
+    } else if (hash_algorithm == "sha512"){
+        hashed_symbols = sha512(buffered_symbols);
+    }
+    return hashed_symbols;
+}
+
+void get_hash(const std::string& prev_string, std::string& freash_hash, std::string& hash_algorithm){
+
+    freash_hash = get_hashed(freash_hash.append(prev_string), hash_algorithm);
+
+
+}
+
     std::string get_hash(std::string& buffered_symbols, int size_to_alignment, std::string& hash_algorithm){
 
 
@@ -105,27 +133,15 @@ void remove_elems_with_unique_value(std::map<std::string, std::string>& map, std
 
 
 
-        //TODO куда-то эту хрень нужно перенести а то оно ж каждый раз проверяет
-        if (hash_algorithm == "md5"){
-            hashed_symbols = md5(buffered_symbols);
-        } else if (hash_algorithm == "sha1"){
+        hashed_symbols = get_hashed(buffered_symbols, hash_algorithm);
 
-            hashed_symbols = sha1(buffered_symbols);
-        } else if (hash_algorithm == "sha224"){
-
-            hashed_symbols = sha224(buffered_symbols);
-        } else if (hash_algorithm == "sha256"){
-            hashed_symbols = sha256(buffered_symbols);
-        } else if (hash_algorithm == "sha384"){
-            hashed_symbols = sha384(buffered_symbols);
-        } else if (hash_algorithm == "sha512"){
-            hashed_symbols = sha512(buffered_symbols);
-        }
 
         std::cout << "we have: " << hashed_symbols <<  std::endl;
         return hashed_symbols;
 
     }
+
+
 
     void compare_finished_files(std::vector<std::string>& finished_files, std::map<std::string, std::string>& map_filename_hash,
                                 std::vector<std::vector<std::string>>& confirmed_dublicats){
@@ -233,7 +249,16 @@ void remove_elems_with_unique_value(std::map<std::string, std::string>& map, std
                 std::string  buff(buffer_char_array);
                 std::cout << current_file_name << ": ";
                 std::string hashed = get_hash(buff, read_step, hash_algorithm);
-                map_filename_hash[current_file_name] += hashed;
+                std::string prev_hash(map_filename_hash[current_file_name]);
+                std::cout << "before CSOR {" << hashed << "} {" << prev_hash << "} "<< hashed.size() << std::endl;
+
+                if(prev_hash.empty()){
+                    map_filename_hash[current_file_name] = hashed;
+                } else {
+                    get_hash(map_filename_hash[current_file_name], hashed, hash_algorithm);
+                    map_filename_hash[current_file_name] = hashed;
+                }
+
             }
             std::cout << "before remove unique " << map_filename_hash.size() << std::endl;
 
