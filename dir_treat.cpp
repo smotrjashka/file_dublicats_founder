@@ -97,11 +97,18 @@ void remove_elems_with_unique_value(std::map<std::string, std::string>& map, std
 
         if (buffered_symbols.size() < size_to_alignment){
             std::cout  << " ALIGMENT " << buffered_symbols.size() << " " << size_to_alignment;
+
+  //          buffered_symbols = buffered_symbols.substr(1, buffered_symbols.size()-1);
+   //         std::cout  << " WithOut last  {" << buffered_symbols << "} " << buffered_symbols.size() << std::endl;
             while (buffered_symbols.size() < size_to_alignment) {
+     //       while (buffered_symbols.size() < 16) {
                 buffered_symbols += ('\u0000');
             }
+            std::cout << "Buffered symbols after rewrite: {" << buffered_symbols << "} ";
         }
         std::cout << std::endl;
+
+
 
         //TODO куда-то эту хрень нужно перенести а то оно ж каждый раз проверяет
         if (hash_algorithm == "md5"){
