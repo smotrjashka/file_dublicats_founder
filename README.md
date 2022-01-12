@@ -95,7 +95,7 @@ $ bayan [...]
     - 0 means only current directory (default value)
     - 1 mean scan subdirectories too
  - `-s` min file size
- - `-fn` file names mask (как поняла значения словосочетания "маски файлов" так и сделала ;-) )
+ - `-m` file names mask (как поняла значения словосочетания "маски файлов" так и сделала ;-) )
  - `-x` extension of desired files 
  - `-e` extension of skipped files
  - `-n` size of read block

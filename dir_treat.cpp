@@ -88,8 +88,6 @@ void remove_elems_with_unique_value(std::map<std::string, std::string>& map, std
 
     std::string get_hash(std::string& buffered_symbols, int size_to_alignment, std::string& hash_algorithm){
 
-        //TODO test
-        std::cout << "HASH! " << hash_algorithm << std::endl;
 
         std::string hashed_symbols;
 

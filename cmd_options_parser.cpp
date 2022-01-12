@@ -89,7 +89,7 @@ int treat_command_with_options(std::string& command, std::vector<std::string>& c
         change_ds(command_option_args, directories_skipped, have_skipped_dirs);
     } else  if(command == "-s"){
         change_size(command_option_args[0], byte);
-    } else if(command == "-fn"){
+    } else if(command == "-m"){
         change_ds(command_option_args, file_masks, is_file_mask_on);
     } else  if(command == "-x"){
         change_ds(command_option_args, extensions_to_scan, is_flag_extensions_to_find_on);

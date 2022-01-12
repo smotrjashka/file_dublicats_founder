@@ -14,7 +14,7 @@ void print_general_commands_info(){
               "`-ds` directories for skip" << std::endl <<
               "`-l 1` or `-l 0`" << std::endl <<
               "`-s` min file size" << std::endl <<
-              "`-fn` file names mask " << std::endl <<
+              "`-m` file names mask " << std::endl <<
               "`-x` extension of desired files "<< std::endl <<
               "`-e` extension of skipped files" << std::endl <<
               "`-n` size of read block" << std::endl <<
@@ -87,7 +87,7 @@ void print_x_info(){
 
 void print_fn_info(){
 
-    std::cout << "-fn \"file_names_mask\" " << std::endl;
+    std::cout << "-m \"file_names_mask\" " << std::endl;
 
     std::cout <<"'start_name*' выберет все файлы начинающиеся со 'start_name'" << std::endl <<
               "например 'start_name_of_some_video.mp4' или 'start_name_of_book.pdf'" << std::endl <<
@@ -130,7 +130,7 @@ void print_command_info(const char* str) {
         print_ds_info();
     } else  if(str == std::string("-s").c_str()){
         print_s_info();
-    } else if(str == std::string("-fn").c_str()){
+    } else if(str == std::string("-m").c_str()){
         print_fn_info();
     } else  if(str == std::string("-x").c_str()){
         print_x_info();
